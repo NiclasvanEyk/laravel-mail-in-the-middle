@@ -1,0 +1,33 @@
+.mail-sidebar-entry .mailto {
+    color: var(--secondary);
+}
+
+.mail-sidebar-entry.active .mailto {
+    color: white;
+}
+
+.mail-sidebar-entry:not(.active):hover .view-mail {
+    transform: translateX(0);
+}
+
+.view-mail {
+    padding: $list-group-item-padding-y
+    $list-group-item-padding-x;
+    transform: translateX(100%);
+    transition: transform .15s ease-in-out;
+}
+
+
+.refreshing {
+    animation: refresh 1s linear infinite;
+}
+
+@keyframes refresh {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

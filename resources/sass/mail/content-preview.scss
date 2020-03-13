@@ -1,0 +1,18 @@
+
+
+.mail-src,
+.var-dump > pre {
+    font-family: $font-family-monospace !important;
+    font-size: 1em !important;
+}
+
+.mail-src,
+.var-dump {
+    padding: 1em;
+}
+
+.var-dump {
+    pre {
+        outline: none !important;
+    }
+}

@@ -1,0 +1,16 @@
+.file-download-pill {
+    display: inline-block;
+    border: 1px solid $gray-400;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s, border-color 0.2s;
+
+    &:hover, &:focus, &:focus-within {
+        outline: none !important;
+        -moz-user-focus: ignore !important;
+
+        background: rgba($primary, 0.05);
+        border-color: $gray-900;
+        cursor: pointer;
+    }
+}

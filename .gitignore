@@ -1,0 +1,11 @@
+node_modules/
+vendor/
+dist/
+.code/
+.idea/
+.DS_STORE
+mix-manifest.json
+.php_cs.cache
+.phpunit.result.cache
+composer.lock
+package-lock.json
