@@ -1,6 +1,6 @@
 {
     "name": "niclas-van-eyk/laravel-mail-in-the-middle",
-    "description": "Send mails to the database and preview them in your browser",
+    "description": "Send mails to the filesystem / database and preview them in your browser",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
@@ -39,7 +39,6 @@
     "scripts": {
         "cs": "php-cs-fixer fix -vvv src",
         "phpstan": "phpstan analyze --level 5 src",
-        "lint": "@cs && @rector",
         "test:lint": "@cs --dry-run",
         "test:types": "@phpstan",
         "test:suite": "phpunit",
