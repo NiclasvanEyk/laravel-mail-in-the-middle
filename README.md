@@ -24,7 +24,34 @@ Require the library via composer:
 composer require niclasvaneyk/laravel-mail-in-the-middle --dev
 ```
 
-Then add / replace the `MAIL_DRIVER` variable in your `.env`-file:
+#### If you are using Laravel 7 or later version
+
+Add the following entry to the `mailers` array in your `config/mail.php`:
+
+```php
+// ...
+
+'mailers' => [
+    // the standard mailers, the one before this is usually 'array'...
+    
+    // This entry needs to be added
+    'mail-in-the-middle' => [
+        'transport' => 'mail-in-the-middle',
+    ],
+],
+
+// rest of the configuration...
+```
+
+Add / replace the following parts in your `.env`-file:
+
+```dotenv
+MAIL_MAILER=mail-in-the-middle
+```
+
+#### If you are using Laravel before 7
+
+Add / replace the following parts in your `.env`-file:
 
 ```dotenv
 MAIL_DRIVER=mail-in-the-middle
