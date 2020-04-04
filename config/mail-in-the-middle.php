@@ -2,14 +2,18 @@
 
 return [
     /**
-     * Per default, the package registers the necessary routes if your app is
-     * in debug mode. This behaviour can be overridden by setting the
-     * MAIL_IN_THE_MIDDLE_ENABLED environment variable.
+     * By default, the package is only enabled if your app is in debug mode.
      */
-    'autoRegister' => env(
+    'enabled' => env(
         'MAIL_IN_THE_MIDDLE_ENABLED',
         env('APP_DEBUG', false)
     ),
+
+    /**
+     * By default we register the necessary routes for this package
+     * automatically.
+     */
+    'register_routes' => true,
 
     /**
      * The path where the package gets registered if it handles the

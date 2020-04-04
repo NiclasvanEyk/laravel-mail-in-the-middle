@@ -15,36 +15,39 @@ class MailInTheMiddleServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->bindClasses();
         $this->mergeConfigFrom(Path::config(Config::FILE_NAME), Config::KEY);
-        $this->loadMigrationsFrom(Path::migration());
+        $this->bindClasses();
     }
 
     public function boot(): void
     {
-        $this->addTransportDriver();
+        if ($this->app->runningInConsole()) {
+            $this->setupPublishes();
+        }
 
-        if (Config::get('autoRegister')) {
+        if (Config::get('enabled') === false) {
+            return;
+        }
+
+        $this->addTransportDriver();
+        $this->loadViewsFrom(Path::view(), Config::KEY);
+
+        if (Config::get('register_routes')) {
             $this->loadRoutesFrom(Path::routes('api.php'));
             $this->loadRoutesFrom(Path::routes('web.php'));
-            $this->loadViewsFrom(Path::view(), Config::KEY);
         }
 
         if (Config::get('storage_driver') === 'database') {
             $this->loadMigrationsFrom(Path::migration());
         }
 
-        if ($this->app->runningInConsole()) {
-            $this->setupPublishes();
-            $this->commands([
-                HouseKeepingCommand::class,
-            ]);
-        }
+        $this->commands([
+            HouseKeepingCommand::class,
+        ]);
     }
 
     public function addTransportDriver()
     {
-        // Just call this once, to boot the MailServiceProvider
         $mailManager = app()->make('mail.manager');
 
         $mailManager->extend(

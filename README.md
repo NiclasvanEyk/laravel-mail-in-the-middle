@@ -34,7 +34,7 @@ If you are sending your `Mailable`s via the default `Mailer` (e.g
 `Mail::to('recipient@company.org')->send(new MyMailable())`) they will now 
 show up in the UI. The UI is available, if `APP_DEBUG` is set to true. 
 Otherwise it can be enabled/disabled by setting the `MAIL_IN_THE_MIDDLE_ENABLED`
-environment variable or by manually configuring the `'autoRegister'`-value
+environment variable or by manually configuring the `'register_routes'`-value
 of the `config/mail-in-the-middle.php` file. 
 
 **WARNING**: any mails, that are sent using another mailer, e.g. if you 
