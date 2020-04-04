@@ -152,7 +152,8 @@ class FilesystemStorage implements MailStorage
 
     public function paginate(int $page = 1, $perPage = 10): PaginatorContract
     {
-        $contents = $this->filesystem->disk()->directories();
+        $contents = array_reverse($this->filesystem->disk()->directories());
+
         $offset = ($page - 1) * $perPage;
         $folders = array_slice($contents, $offset, $perPage, true);
 
@@ -164,7 +165,10 @@ class FilesystemStorage implements MailStorage
                 'rendered',
             ]);
         }, $folders);
-        $items = array_reverse($items);
+
+        // This resets the array indices, which is necessary for the frontend to
+        // properly function
+        $items = array_values($items);
 
         $paginator = new Paginator($items, $perPage, $page);
         $paginator->hasMorePagesWhen($offset + $perPage < count($contents));
