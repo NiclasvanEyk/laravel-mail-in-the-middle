@@ -45,7 +45,7 @@ class Filesystem
 
     public function relativeMailFolderPath(StoredMail $mail): string
     {
-        return $mail->id;
+        return (string) $mail->id;
     }
 
     public function relativeAttachmentContentPath(

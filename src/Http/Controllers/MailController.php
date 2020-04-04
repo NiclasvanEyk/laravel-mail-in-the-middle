@@ -28,11 +28,11 @@ class MailController
     {
         $mail = $this->storage->find($mailId);
 
-        abort_if($mail === null, 404);
+        abort_if($mail == null, 404);
 
         $attachment = $this->storage->findAttachment($mail, $attachmentId);
 
-        abort_if($mail === null, 404);
+        abort_if($attachment == null, 404);
 
         return response($attachment->contents())->withHeaders([
             'content-disposition' => 'attachment; filename="' . $attachment->name . '"',
