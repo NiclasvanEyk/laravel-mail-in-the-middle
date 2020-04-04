@@ -19,8 +19,11 @@
                 </strong> This means the mails sent by your application will
                 probably not show up here. You can change this by setting
                 <code>{{$envKey}}="{{\VanEyk\MITM\Support\Config::KEY}}"</code>
-                in your <code>.env</code>-file or by configuring your
-                <code>config/mail.php</code> as its described in the readme.
+                in your <code>.env</code>-file once you have
+                <a href="https://github.com/NiclasvanEyk/laravel-mail-in-the-middle#installation">
+                    installed and configured this package as its described in
+                    the readme
+                </a>.
 
                 <i>Note that you need to restart your server, if you are using
                 <code>php artisan serve</code> after you changed your
