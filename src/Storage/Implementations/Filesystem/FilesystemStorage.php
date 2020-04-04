@@ -27,7 +27,7 @@ use VanEyk\MITM\Models\StoredMail;
  */
 class FilesystemStorage implements MailStorage
 {
-    public const TIMESTAMP_FORMAT = 'Y-m-d_h:i:s_u';
+    public const TIMESTAMP_FORMAT = 'Y-m-d_H:i:s_u';
 
     /** @var Filesystem */
     private $filesystem;
