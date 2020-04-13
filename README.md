@@ -6,6 +6,13 @@ and view data of your Mailables](#more-screenshots).
 
 <p align="center"><img src="docs/images/content.png" width="80%"/></p>
 
+<p align="center">
+    <a href="https://github.com/niclasvaneyk/laravel-mail-in-the-middle/actions"><img src="https://github.com/niclasvaneyk/laravel-mail-in-the-middle/workflows/tests/badge.svg" alt="Build Status"></a>
+    <a href="https://packagist.org/packages/niclasvaneyk/laravel-mail-in-the-middle"><img src="https://poser.pugx.org/niclasvaneyk/laravel-mail-in-the-middle/d/total.svg" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/niclasvaneyk/laravel-mail-in-the-middle"><img src="https://poser.pugx.org/niclasvaneyk/laravel-mail-in-the-middle/v/stable.svg" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/niclasvaneyk/laravel-mail-in-the-middle"><img src="https://poser.pugx.org/niclasvaneyk/laravel-mail-in-the-middle/license.svg" alt="License"></a>
+</p>
+
 If you send a mail using `Mail::send(new MyMailable())`, the mail will be 
 stored either in your database or on your filesystem. You can then visit 
 `localhost:8000/mails` (or whatever your `APP_URL` is set to), to see the 
