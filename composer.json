@@ -39,11 +39,15 @@
     "scripts": {
         "cs": "php-cs-fixer fix -vvv src",
         "phpstan": "phpstan analyze --level 5 src",
-        "test:lint": "@cs --dry-run",
+        "test:style": "@cs --dry-run",
         "test:types": "@phpstan",
         "test:suite": "phpunit",
         "test": [
-            "@test:lint",
+            "@test:style",
+            "@test:types",
+            "@test:suite"
+        ],
+        "test:ci": [
             "@test:types",
             "@test:suite"
         ]
