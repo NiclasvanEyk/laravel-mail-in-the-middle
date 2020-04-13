@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\Paginator as PaginatorContract;
 use Illuminate\Pagination\Paginator;
 use Swift_Mime_SimpleMessage;
+use VanEyk\MITM\Exceptions\CouldNotStoreMailException;
 use VanEyk\MITM\Models\StoredAttachment;
 use VanEyk\MITM\Storage\Filesystem;
 use VanEyk\MITM\Storage\Implementations\Database\DatabaseStorage;
@@ -105,7 +106,11 @@ class FilesystemStorage implements MailStorage
 
         $json = $mail->toJson(JSON_PRETTY_PRINT);
 
-        $this->filesystem->disk()->put($this->mailJsonPath($id), $json);
+        $didStore = $this->filesystem->disk()->put($this->mailJsonPath($id), $json);
+
+        if (!$didStore) {
+            throw new CouldNotStoreMailException($mail);
+        }
 
         return $mail;
     }
