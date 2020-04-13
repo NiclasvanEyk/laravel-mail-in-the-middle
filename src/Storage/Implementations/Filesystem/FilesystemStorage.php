@@ -5,6 +5,7 @@ namespace VanEyk\MITM\Storage\Implementations\Filesystem;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\Paginator as PaginatorContract;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Log;
 use Swift_Mime_SimpleMessage;
 use VanEyk\MITM\Exceptions\CouldNotStoreMailException;
 use VanEyk\MITM\Models\StoredAttachment;
@@ -105,6 +106,8 @@ class FilesystemStorage implements MailStorage
         $this->saveAttachments($message, $mail);
 
         $json = $mail->toJson(JSON_PRETTY_PRINT);
+
+        echo "[MITM] Storing Mail $mail->id to '{$this->mailJsonPath($id)}'" . PHP_EOL;
 
         $didStore = $this->filesystem->disk()->put($this->mailJsonPath($id), $json);
 
