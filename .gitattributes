@@ -1,5 +1,7 @@
 * text=auto
 
+*.php text
+
 /.github export-ignore
 /tests export-ignore
 /docs export-ignore
