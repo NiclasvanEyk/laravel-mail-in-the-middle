@@ -24,8 +24,6 @@ Require the library via composer:
 composer require niclasvaneyk/laravel-mail-in-the-middle --dev
 ```
 
-#### If you are using Laravel 7 or later version
-
 Add the following entry to the `mailers` array in your `config/mail.php`:
 
 ```php
@@ -47,14 +45,6 @@ Add / replace the following parts in your `.env`-file:
 
 ```dotenv
 MAIL_MAILER=mail-in-the-middle
-```
-
-#### If you are using Laravel before 7
-
-Add / replace the following parts in your `.env`-file:
-
-```dotenv
-MAIL_DRIVER=mail-in-the-middle
 ```
 
 If you are sending your `Mailable`s via the default `Mailer` (e.g 
