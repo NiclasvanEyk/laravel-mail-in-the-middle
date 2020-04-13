@@ -39,7 +39,7 @@ jobs:
 
       - name: Code style
         run: composer run test:style
-        if: matrix.laravel == 7.*
+        if: ${{ matrix.laravel == '7.*' }}
 
       - name: Check types
         run: composer run test:types
