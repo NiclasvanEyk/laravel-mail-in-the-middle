@@ -11,6 +11,7 @@ class MITMTestCase extends TestCase
     protected function getEnvironmentSetUp($app)
     {
         $defaults = require(__DIR__ . '/../config/mail-in-the-middle.php');
+        $defaults['enabled'] = true;
         $config = array_merge($defaults, $this->mitmConfig());
 
         $app['config']->set(Config::KEY, $config);
@@ -23,10 +24,5 @@ class MITMTestCase extends TestCase
         return [
             MailInTheMiddleServiceProvider::class
         ];
-    }
-
-    protected function mitmConfig(): array
-    {
-        return [];
     }
 }

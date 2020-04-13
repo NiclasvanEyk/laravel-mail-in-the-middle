@@ -14,24 +14,10 @@ use VanEyk\MITM\Storage\MailStorage;
  */
 abstract class MailStorageTestCase extends MITMTestCase
 {
-    abstract function storageConfig(): array;
-
     /** @var MailStorage */
     private $storage;
 
-    protected final function mitmConfig(): array
-    {
-        $config = $this->storageConfig();
-        $driverName = array_keys($config)[0];
-        $driverConfig = $config[$driverName];
-
-        return [
-            'storage_driver' => $driverName,
-            'storage_drivers' => [
-                $driverName => $driverConfig,
-            ]
-        ];
-    }
+    abstract public function mitmConfig(): array;
 
     protected function setUp(): void
     {

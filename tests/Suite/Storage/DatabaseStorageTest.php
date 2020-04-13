@@ -20,20 +20,8 @@ class DatabaseStorageTest extends MailStorageTestCase
         $this->artisan('migrate');
     }
 
-    public function implementation()
+    public function mitmConfig(): array
     {
-        return DatabaseStorage::class;
-    }
-
-    public function storageConfig(): array
-    {
-        return [
-            'database' => [
-                'implementation' => DatabaseStorage::class,
-                'options' => [
-                    'model' => StoredMail::class,
-                ],
-            ],
-        ];
+        return ['storage_driver' => 'database'];
     }
 }

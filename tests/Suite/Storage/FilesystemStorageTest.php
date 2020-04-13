@@ -25,15 +25,11 @@ class FilesystemStorageTest extends MailStorageTestCase
         Storage::fake('mitm-testing');
     }
 
-    function storageConfig(): array
+    public function mitmConfig(): array
     {
         return [
-            'filesystem' => [
-                'implementation' => FilesystemStorage::class,
-                'options' => [
-                    'disk' => 'mitm-testing',
-                ],
-            ],
+            'disk' => 'mitm-testing',
+            // This storage_driver should be the default
         ];
     }
 }
