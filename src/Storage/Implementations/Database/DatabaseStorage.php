@@ -14,7 +14,7 @@ use VanEyk\MITM\Storage\MailStorage;
 
 class DatabaseStorage implements MailStorage
 {
-    public const TABLE_PREFIX = 'mtim';
+    public const TABLE_PREFIX = 'mitm';
 
     /** @var string|Model|Builder */
     private $model;
