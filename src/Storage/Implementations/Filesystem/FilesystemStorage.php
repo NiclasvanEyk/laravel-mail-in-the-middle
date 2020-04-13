@@ -118,10 +118,14 @@ class FilesystemStorage implements MailStorage
                 $attributes = [
                     'id' => $i,
                     'name' => $attachment->getFilename(),
-                    'mime_type' => $attachment->getBodyContentType(),
+                    'mime_type' => '',
                     'mail_id' => $mail->id,
                     'created_at' => now(),
                 ];
+
+                if (method_exists($attachment, 'getBodyContentType')) {
+                    $attributes['mime_type'] = $attachment->getBodyContentType();
+                }
 
                 $instance = $this->attachmentForMailFromAttributes($mail, $attributes);
 
