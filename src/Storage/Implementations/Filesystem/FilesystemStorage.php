@@ -198,7 +198,7 @@ class FilesystemStorage implements MailStorage
             $attributesFileContent = $this->filesystem->disk()->get(
                 $attributesFile
             );
-            $attributes = json_decode($attributesFileContent, true, 512, JSON_THROW_ON_ERROR);
+            $attributes = json_decode($attributesFileContent, true, 512);
             $attachment = $this->attachmentForMailFromAttributes($mail, $attributes);
 
             // If we set the mail relation here, then the JSON-serialization
@@ -260,7 +260,7 @@ class FilesystemStorage implements MailStorage
         abort_if(! $this->filesystem->disk()->exists($attachmentPath), 404);
         abort_if(! $this->filesystem->disk()->exists($attachmentAttributesPath), 404);
 
-        $attributes = json_decode($this->filesystem->disk()->get($attachmentAttributesPath), true, 512, JSON_THROW_ON_ERROR);
+        $attributes = json_decode($this->filesystem->disk()->get($attachmentAttributesPath), true, 512);
 
         return $this->attachmentForMailFromAttributes($mail, $attributes);
     }
