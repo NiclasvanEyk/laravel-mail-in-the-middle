@@ -152,4 +152,5 @@ first with a description of your proposed feature addition to get some feedback.
 ## Known issues
 
 This package does not seem to function correctly if you set 
-`"minimum-stability"` to `"lowest"` on windows.
+`"minimum-stability"` to `"lowest"` on windows. As I have currently no access
+to a windows machine I cannot reproduce this locally.

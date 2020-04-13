@@ -107,20 +107,7 @@ class FilesystemStorage implements MailStorage
 
         $json = $mail->toJson(JSON_PRETTY_PRINT);
 
-        echo "[MITM] Storing Mail $mail->id to '{$this->mailJsonPath($id)}'" . PHP_EOL;
-
-        $didStore = $this->filesystem->disk()->put($this->mailJsonPath($id), $json);
-
-        if (!$didStore) {
-            throw new CouldNotStoreMailException($mail);
-        }
-
-        $contents = implode(', ', array_merge(
-            $this->filesystem->disk()->allDirectories($this->mailJsonPath($id)),
-            $this->filesystem->disk()->allFiles($this->mailJsonPath($id))
-        ));
-
-        echo "[MITM] '{$this->mailFolderPath($id)}': $contents";
+        $this->filesystem->disk()->put($this->mailJsonPath($id), $json);
 
         return $mail;
     }
@@ -257,9 +244,6 @@ class FilesystemStorage implements MailStorage
         $filesInFolder = $this->filesystem->disk()->files(
             $this->mailFolderPath($id)
         );
-        $asString = implode(', ', $filesInFolder);
-
-        echo "[MITM] '{$this->mailFolderPath($id)}': $asString";
 
         if (!$filesInFolder || count($filesInFolder) <= 0) {
             return null;
