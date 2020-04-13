@@ -7,7 +7,7 @@ and view data of your Mailables](#more-screenshots).
 <p align="center"><img src="docs/images/content.png" width="80%"/></p>
 
 <p align="center">
-    <a href="https://github.com/niclasvaneyk/laravel-mail-in-the-middle/actions"><img src="https://github.com/niclasvaneyk/laravel-mail-in-the-middle/workflows/tests/badge.svg" alt="Build Status"></a>
+    <a href="https://github.com/niclasvaneyk/laravel-mail-in-the-middle/actions"><img src="https://github.com/niclasvaneyk/laravel-mail-in-the-middle/workflows/Tests/badge.svg" alt="Build Status"></a>
     <a href="https://packagist.org/packages/niclas-van-eyk/laravel-mail-in-the-middle"><img src="https://poser.pugx.org/niclas-van-eyk/laravel-mail-in-the-middle/d/total.svg" alt="Total Downloads"></a>
     <a href="https://packagist.org/packages/niclas-van-eyk/laravel-mail-in-the-middle"><img src="https://poser.pugx.org/niclas-van-eyk/laravel-mail-in-the-middle/v/stable.svg" alt="Latest Stable Version"></a>
     <a href="https://packagist.org/packages/niclas-van-eyk/laravel-mail-in-the-middle"><img src="https://poser.pugx.org/niclas-van-eyk/laravel-mail-in-the-middle/license.svg" alt="License"></a>
