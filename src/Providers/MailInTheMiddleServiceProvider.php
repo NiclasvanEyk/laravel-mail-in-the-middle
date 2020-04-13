@@ -48,14 +48,14 @@ class MailInTheMiddleServiceProvider extends ServiceProvider
 
     public function addTransportDriver()
     {
-        $mailManager = app()->make('mail.manager');
-
-        $mailManager->extend(
-            Config::KEY,
-            function () {
-                return new MailInTheMiddleMailer(app(MailStorage::class));
-            }
-        );
+        $this->callAfterResolving('mail.manager', function ($mailManager) {
+            $mailManager->extend(
+                Config::KEY,
+                function () {
+                    return new MailInTheMiddleMailer(app(MailStorage::class));
+                }
+            );
+        });
     }
 
     public function setupPublishes()
