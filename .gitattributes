@@ -1,6 +1,6 @@
 * text=auto
 
-*.php text
+*.php text eol=lf
 
 /.github export-ignore
 /tests export-ignore
