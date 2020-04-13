@@ -18,6 +18,9 @@ jobs:
         include:
           - laravel: 7.*
             testbench: 5.*
+        exclude:
+          - dependency-version: prefer-lowest
+            os: windows-latest
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 

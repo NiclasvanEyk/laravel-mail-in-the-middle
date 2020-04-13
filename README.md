@@ -148,3 +148,8 @@ of access control will be added in the near future. This being said, if you
 want to contribute such features I am open to any PRs, but it is recommended to
 [file an issue](https://github.com/NiclasvanEyk/laravel-mail-in-the-middle/issues/new) 
 first with a description of your proposed feature addition to get some feedback.
+
+## Known issues
+
+This package does not seem to function correctly if you set 
+`"minimum-stability"` to `"lowest"` on windows.
