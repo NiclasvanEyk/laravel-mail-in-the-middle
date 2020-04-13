@@ -24,12 +24,12 @@
         }
     },
     "require": {
+        "php": "7.*",
         "ext-json": "*",
         "laravel/framework": "^7.2"
     },
     "require-dev": {
         "nunomaduro/collision": "^4.1",
-        "phpunit/phpunit": "^9.0",
         "mockery/mockery": "^1.3",
         "phpstan/phpstan": "^0.12.17",
         "friendsofphp/php-cs-fixer": "^2.16",
@@ -39,11 +39,15 @@
     "scripts": {
         "cs": "php-cs-fixer fix -vvv src",
         "phpstan": "phpstan analyze --level 5 src",
-        "test:lint": "@cs --dry-run",
+        "test:style": "@cs --dry-run",
         "test:types": "@phpstan",
         "test:suite": "phpunit",
         "test": [
-            "@test:lint",
+            "@test:style",
+            "@test:types",
+            "@test:suite"
+        ],
+        "test:ci": [
             "@test:types",
             "@test:suite"
         ]

@@ -5,7 +5,9 @@ namespace VanEyk\MITM\Storage\Implementations\Filesystem;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\Paginator as PaginatorContract;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Log;
 use Swift_Mime_SimpleMessage;
+use VanEyk\MITM\Exceptions\CouldNotStoreMailException;
 use VanEyk\MITM\Models\StoredAttachment;
 use VanEyk\MITM\Storage\Filesystem;
 use VanEyk\MITM\Storage\Implementations\Database\DatabaseStorage;
@@ -27,7 +29,9 @@ use VanEyk\MITM\Models\StoredMail;
  */
 class FilesystemStorage implements MailStorage
 {
-    public const TIMESTAMP_FORMAT = 'Y-m-d_H:i:s_u';
+    // This needs to be a valid path on Windows, so no ":" or something like
+    // that!
+    public const TIMESTAMP_FORMAT = 'Y-m-d_H-i-s_u';
 
     /** @var Filesystem */
     private $filesystem;
@@ -118,10 +122,14 @@ class FilesystemStorage implements MailStorage
                 $attributes = [
                     'id' => $i,
                     'name' => $attachment->getFilename(),
-                    'mime_type' => $attachment->getBodyContentType(),
+                    'mime_type' => '',
                     'mail_id' => $mail->id,
                     'created_at' => now(),
                 ];
+
+                if (method_exists($attachment, 'getBodyContentType')) {
+                    $attributes['mime_type'] = $attachment->getBodyContentType();
+                }
 
                 $instance = $this->attachmentForMailFromAttributes($mail, $attributes);
 
@@ -198,7 +206,7 @@ class FilesystemStorage implements MailStorage
             $attributesFileContent = $this->filesystem->disk()->get(
                 $attributesFile
             );
-            $attributes = json_decode($attributesFileContent, true, 512, JSON_THROW_ON_ERROR);
+            $attributes = json_decode($attributesFileContent, true, 512);
             $attachment = $this->attachmentForMailFromAttributes($mail, $attributes);
 
             // If we set the mail relation here, then the JSON-serialization
@@ -233,7 +241,9 @@ class FilesystemStorage implements MailStorage
 
     public function find($id): ?StoredMail
     {
-        $filesInFolder = $this->filesystem->disk()->files($id);
+        $filesInFolder = $this->filesystem->disk()->files(
+            $this->mailFolderPath($id)
+        );
 
         if (!$filesInFolder || count($filesInFolder) <= 0) {
             return null;
@@ -260,7 +270,7 @@ class FilesystemStorage implements MailStorage
         abort_if(! $this->filesystem->disk()->exists($attachmentPath), 404);
         abort_if(! $this->filesystem->disk()->exists($attachmentAttributesPath), 404);
 
-        $attributes = json_decode($this->filesystem->disk()->get($attachmentAttributesPath), true, 512, JSON_THROW_ON_ERROR);
+        $attributes = json_decode($this->filesystem->disk()->get($attachmentAttributesPath), true, 512);
 
         return $this->attachmentForMailFromAttributes($mail, $attributes);
     }

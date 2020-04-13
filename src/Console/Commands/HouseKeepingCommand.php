@@ -13,9 +13,7 @@ class HouseKeepingCommand extends Command
         . ':'
         . 'clear-mails-older-than';
 
-    protected $signature = self::COMMAND . "
-        {relativeDateInPast='last week' : A description of a date that php can parse}
-    ";
+    protected $signature = self::COMMAND . "        {relativeDateInPast='last week' : A description of a date that php can parse}    ";
     protected $description = 'Deletes all stored mails older than the specified date';
 
     public function handle(): int
@@ -24,10 +22,8 @@ class HouseKeepingCommand extends Command
         $olderThan = new Carbon($olderThanInput);
 
         if (! $olderThan->isValid()) {
-            $this->error(
-                "'$olderThanInput' could not be parsed to a valid date!"
-                    . ' No mails were deleted.'
-            );
+            $this->error("'$olderThanInput' could not be parsed to a valid date!"
+                    . ' No mails were deleted.');
             return -1;
         }
 

@@ -6,6 +6,13 @@ and view data of your Mailables](#more-screenshots).
 
 <p align="center"><img src="docs/images/content.png" width="80%"/></p>
 
+<p align="center">
+    <a href="https://github.com/niclasvaneyk/laravel-mail-in-the-middle/actions"><img src="https://github.com/niclasvaneyk/laravel-mail-in-the-middle/workflows/tests/badge.svg" alt="Build Status"></a>
+    <a href="https://packagist.org/packages/niclasvaneyk/laravel-mail-in-the-middle"><img src="https://poser.pugx.org/niclasvaneyk/laravel-mail-in-the-middle/d/total.svg" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/niclasvaneyk/laravel-mail-in-the-middle"><img src="https://poser.pugx.org/niclasvaneyk/laravel-mail-in-the-middle/v/stable.svg" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/niclasvaneyk/laravel-mail-in-the-middle"><img src="https://poser.pugx.org/niclasvaneyk/laravel-mail-in-the-middle/license.svg" alt="License"></a>
+</p>
+
 If you send a mail using `Mail::send(new MyMailable())`, the mail will be 
 stored either in your database or on your filesystem. You can then visit 
 `localhost:8000/mails` (or whatever your `APP_URL` is set to), to see the 
@@ -23,8 +30,6 @@ Require the library via composer:
 ```shell script
 composer require niclasvaneyk/laravel-mail-in-the-middle --dev
 ```
-
-#### If you are using Laravel 7 or later version
 
 Add the following entry to the `mailers` array in your `config/mail.php`:
 
@@ -47,14 +52,6 @@ Add / replace the following parts in your `.env`-file:
 
 ```dotenv
 MAIL_MAILER=mail-in-the-middle
-```
-
-#### If you are using Laravel before 7
-
-Add / replace the following parts in your `.env`-file:
-
-```dotenv
-MAIL_DRIVER=mail-in-the-middle
 ```
 
 If you are sending your `Mailable`s via the default `Mailer` (e.g 
@@ -158,3 +155,9 @@ of access control will be added in the near future. This being said, if you
 want to contribute such features I am open to any PRs, but it is recommended to
 [file an issue](https://github.com/NiclasvanEyk/laravel-mail-in-the-middle/issues/new) 
 first with a description of your proposed feature addition to get some feedback.
+
+## Known issues
+
+This package does not seem to function correctly if you set 
+`"minimum-stability"` to `"lowest"` on windows. As I have currently no access
+to a windows machine I cannot reproduce this locally.

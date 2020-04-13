@@ -15,7 +15,12 @@ class MITMTestCase extends TestCase
         $config = array_merge($defaults, $this->mitmConfig());
 
         $app['config']->set(Config::KEY, $config);
-        $app['config']->set('mail.driver', Config::KEY);
+        $app['config']->set('mail.default', Config::KEY);
+        $app['config']->set('mail.mailers', [
+            Config::KEY => [
+                'transport' => Config::KEY,
+            ],
+        ]);
         $app['config']->set('database.default', 'testing');
     }
 
