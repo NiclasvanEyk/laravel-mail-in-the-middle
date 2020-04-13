@@ -115,6 +115,13 @@ class FilesystemStorage implements MailStorage
             throw new CouldNotStoreMailException($mail);
         }
 
+        $contents = implode(', ', array_merge(
+            $this->filesystem->disk()->allDirectories($this->mailJsonPath($id)),
+            $this->filesystem->disk()->allFiles($this->mailJsonPath($id))
+        ));
+
+        echo "[MITM] '{$this->mailFolderPath($id)}': $contents";
+
         return $mail;
     }
 
@@ -247,7 +254,12 @@ class FilesystemStorage implements MailStorage
 
     public function find($id): ?StoredMail
     {
-        $filesInFolder = $this->filesystem->disk()->files($id);
+        $filesInFolder = $this->filesystem->disk()->files(
+            $this->mailFolderPath($id)
+        );
+        $asString = implode(', ', $filesInFolder);
+
+        echo "[MITM] '{$this->mailFolderPath($id)}': $asString";
 
         if (!$filesInFolder || count($filesInFolder) <= 0) {
             return null;
