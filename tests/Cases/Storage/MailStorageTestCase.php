@@ -15,7 +15,7 @@ use VanEyk\MITM\Storage\MailStorage;
 abstract class MailStorageTestCase extends MITMTestCase
 {
     /** @var MailStorage */
-    private $storage;
+    protected $storage;
 
     abstract public function mitmConfig(): array;
 

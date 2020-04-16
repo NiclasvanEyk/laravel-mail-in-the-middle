@@ -18,7 +18,9 @@ class MitmCreateMailsTable extends Migration
     {
         Schema::create(self::TABLE, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->timestamp('created_at')
+                ->useCurrent()
+                ->index();
 
             // Metadata
             $table->text('subject')->default('');
