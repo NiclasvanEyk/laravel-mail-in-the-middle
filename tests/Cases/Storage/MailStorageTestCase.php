@@ -15,7 +15,7 @@ use VanEyk\MITM\Storage\MailStorage;
 abstract class MailStorageTestCase extends MITMTestCase
 {
     /** @var MailStorage */
-    private $storage;
+    protected $storage;
 
     abstract public function mitmConfig(): array;
 
@@ -107,13 +107,18 @@ abstract class MailStorageTestCase extends MITMTestCase
     }
 
     /**
-     * @depends it_can_store_mails_without_throwing
-     * @depends it_can_retrieve_a_stored_mail
+
      * @test
      */
     public function it_can_delete_old_mails(): void
     {
-        $old = $this->storage->save(TestMails::emptySwift(), TestMails::emptyStoredMail());
+        // IMPORTANT: As we normally would generate the created_at-timestamp in
+        // the database, we need to set it here manually to simulate different
+        // points in time!
+
+        $old = $this->storage->save(TestMails::emptySwift(), TestMails::emptyStoredMail()->fill([
+            'created_at' => now(),
+        ]));
         $oldId = $this->storage->id($old);
 
         // Lets travel to the future, so the mail we just stored is now over
@@ -121,7 +126,9 @@ abstract class MailStorageTestCase extends MITMTestCase
         Carbon::setTestNow(Carbon::now()->addWeeks(2));
 
         // This newly stored mail should not be deleted!
-        $new = $this->storage->save(TestMails::emptySwift(), TestMails::emptyStoredMail());
+        $new = $this->storage->save(TestMails::emptySwift(), TestMails::emptyStoredMail()->fill([
+            'created_at' => now(),
+        ]));
         $newId = $this->storage->id($new);
 
         $lastWeek = Carbon::now()->subWeek()->toString();

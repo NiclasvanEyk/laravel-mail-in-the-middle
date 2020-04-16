@@ -29,6 +29,9 @@ use VanEyk\MITM\Storage\Implementations\Filesystem\FilesystemStorage;
  */
 class StoredMail extends Model
 {
+    // We only need created_at, which is set on the database side, so we have no
+    // need for it here.
+    public $timestamps = false;
     protected $table = DatabaseStorage::TABLE_PREFIX . '_mails';
     protected $guarded = [];
     protected $dateFormat = FilesystemStorage::TIMESTAMP_FORMAT;
