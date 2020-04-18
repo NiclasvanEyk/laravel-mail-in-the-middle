@@ -61,7 +61,7 @@ class MailInTheMiddleServiceProvider extends ServiceProvider
     public function setupPublishes()
     {
         $this->publishes([
-            Path::config() => config_path(Config::FILE_NAME),
+            Path::config() => config_path(),
         ], Config::KEY . '-config');
 
         $this->publishes([
