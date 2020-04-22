@@ -28,7 +28,7 @@ template](#view-data).
 Require the library via composer:
 
 ```shell script
-composer require niclasvaneyk/laravel-mail-in-the-middle --dev
+composer require niclas-van-eyk/laravel-mail-in-the-middle --dev
 ```
 
 Add the following entry to the `mailers` array in your `config/mail.php`:
