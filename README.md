@@ -33,6 +33,12 @@ composer require niclas-van-eyk/laravel-mail-in-the-middle --dev
 
 Add the following entry to the `mailers` array in your `config/mail.php`:
 
+<details>
+    <summary>If you are not seeing a <code>'mailers'</code> section in your <code>config/mail.php</code> collapse this</summary>
+    <br/>
+    This is probably either because you are using a Laravel version older than the *required* 7.2, or you started your project using the older configuration scheme and updated Laravel from there. For the latter case, just set your <code>'MAIL_DRIVER'</code> environment variable to <code>mail-in-the-middle</code> and you are good to go.
+</details>
+
 ```php
 // ...
 
