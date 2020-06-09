@@ -17,17 +17,25 @@
     transition: transform .15s ease-in-out;
 }
 
+.mail-list-header {
+  .inbox-icon {
+    vertical-align: bottom;
+    margin-bottom: 3px;
+  }
 
-.refreshing {
-    animation: refresh 1s linear infinite;
-}
+  .delete-all-mail {
+    font-size: 1.6em;
+    opacity: 0.5;
+    border-radius: 100%;
+    position: relative;
+    overflow: visible;
+    transition: box-shadow 0.2s, color 0.2s, opacity 0.2s;
 
-@keyframes refresh {
-    0% {
-        transform: rotate(0deg);
+    &:hover {
+      opacity: 1;
+      color: darken($danger, 20%);
+      box-shadow: rgba($danger, 0.2) 0 0 0 50px inset,
+                  rgba($danger, 0.2) 0 0 0 10px;
     }
-
-    100% {
-        transform: rotate(360deg);
-    }
+  }
 }

@@ -3,7 +3,7 @@
 namespace VanEyk\MITM\Storage;
 
 use Carbon\Carbon;
-use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Pagination\Paginator;
 use Swift_Mime_SimpleMessage;
 use VanEyk\MITM\Models\StoredAttachment;
 use VanEyk\MITM\Models\StoredMail;

@@ -15,6 +15,13 @@ class TestMailable extends Mailable
     {
         return $this
             ->from('test@mail-in-the-middle.com')
-            ->markdown(Config::KEY . "::mail.test");
+            ->markdown(Config::KEY . "::mail.test", [
+                'this' => 'is some data that was passed to the view',
+                'it' => 'can even list more complex objects like',
+                'dates' => [
+                    now(),
+                    now()->addDay(),
+                ],
+            ]);
     }
 }

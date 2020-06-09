@@ -13,13 +13,19 @@ use VanEyk\MITM\Support\View;
     Route::get("$path/assets", [AssetController::class, 'get'])
         ->name(PackageRoute::name(AssetController::ROUTE_NAME));
 
-    Route::view($path, View::pageName('mails-overview'), [
-        'mailerUnused' => !Config::usesMailInTheMiddle(),
-        'transport' => Config::mailDriverInUse(),
-        'envKey' => Config::isBeforeLaravel7() ? 'MAIL_DRIVER' : 'MAIL_MAILER',
-    ])->name(PackageRoute::name('overview'));
+    Route::get("$path", [MailController::class, 'index'])
+        ->name(PackageRoute::name('mail-overview'));
 
-    Route::view("$path/{id}", View::pageName('mail-detail'))
+    Route::post("$path/send-test-mail", [MailController::class, 'sendTestMail'])
+        ->name(PackageRoute::name('send-test-mail'));
+
+    Route::delete("$path", [MailController::class, 'clearAll'])
+        ->name(PackageRoute::name('clear-all'));
+
+    Route::delete('/mails/{id}', [MailController::class, 'destroy'])
+        ->name(PackageRoute::name('mail-destroy'));
+
+    Route::get("$path/{id}", [MailController::class, 'show'])
         ->name(PackageRoute::name('mail-detail'));
 
     Route::get("$path/{id}/content", [MailController::class, 'content'])
