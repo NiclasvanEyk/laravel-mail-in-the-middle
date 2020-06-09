@@ -4,6 +4,7 @@ namespace VanEyk\MITM\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use VanEyk\MITM\Console\Commands\HouseKeepingCommand;
+use VanEyk\MITM\Console\Commands\SendTestMailCommand;
 use VanEyk\MITM\Mail\Transport\MailInTheMiddleMailer;
 use VanEyk\MITM\Storage\Filesystem;
 use VanEyk\MITM\Support\Config;
@@ -43,6 +44,7 @@ class MailInTheMiddleServiceProvider extends ServiceProvider
 
         $this->commands([
             HouseKeepingCommand::class,
+            SendTestMailCommand::class,
         ]);
     }
 
