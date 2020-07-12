@@ -45,8 +45,8 @@ jobs:
         run: composer run test:style
         if: ${{ matrix.laravel == '7.*' }}
 
-      - name: Check types
-        run: composer run test:types
+#       - name: Check types
+#         run: composer run test:types
 
       - name: Execute tests
         run: composer run test:suite
