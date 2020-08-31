@@ -3,7 +3,7 @@
 /** @var bool $showPermaLink */
 @endphp
 
-<div class="card" id="meta-data" style="margin-top: 10px">
+<div class="card" id="meta-data">
     <div class="card-header d-flex flex-row border-bottom-0">
         <h2 class="mb-0 flex-grow-1"
             style="cursor: pointer"

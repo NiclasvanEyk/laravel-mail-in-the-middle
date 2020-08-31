@@ -2,7 +2,10 @@
 
 namespace VanEyk\MITM\Providers;
 
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use VanEyk\MITM\Auth\Ability;
 use VanEyk\MITM\Console\Commands\HouseKeepingCommand;
 use VanEyk\MITM\Console\Commands\SendTestMailCommand;
 use VanEyk\MITM\Mail\Transport\MailInTheMiddleMailer;
@@ -31,6 +34,7 @@ class MailInTheMiddleServiceProvider extends ServiceProvider
         }
 
         $this->addTransportDriver();
+        $this->defineGates();
         $this->loadViewsFrom(Path::view(), Config::KEY);
 
         if (Config::get('register_routes')) {
@@ -46,6 +50,17 @@ class MailInTheMiddleServiceProvider extends ServiceProvider
             HouseKeepingCommand::class,
             SendTestMailCommand::class,
         ]);
+    }
+
+    public function defineGates()
+    {
+        Gate::define(Ability::DELETE_MAIL, function ($user = null, $mail) {
+            return true;
+        });
+
+        Gate::define(Ability::DELETE_ALL_MAILS, function ($user = null) {
+            return true;
+        });
     }
 
     public function addTransportDriver()

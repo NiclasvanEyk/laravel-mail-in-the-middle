@@ -1,3 +1,5 @@
+@import "~bootstrap/scss/buttons";
+
 .mail-sidebar-entry .mailto {
     color: var(--secondary);
 }
@@ -11,6 +13,16 @@
 }
 
 .view-mail {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    font-weight: bold;
+
     padding: $list-group-item-padding-y
     $list-group-item-padding-x;
     transform: translateX(100%);
@@ -23,19 +35,39 @@
     margin-bottom: 3px;
   }
 
-  .delete-all-mail {
+  .delete-all-mail-btn {
+    display: flex;
+    overflow: visible;
+    position: relative;
     font-size: 1.6em;
     opacity: 0.5;
-    border-radius: 100%;
-    position: relative;
-    overflow: visible;
-    transition: box-shadow 0.2s, color 0.2s, opacity 0.2s;
 
     &:hover {
       opacity: 1;
       color: darken($danger, 20%);
-      box-shadow: rgba($danger, 0.2) 0 0 0 50px inset,
-                  rgba($danger, 0.2) 0 0 0 10px;
+      transition: opacity 0.2s;
+
+      .round-shadow {
+        opacity: 1;
+      }
+    }
+
+    .round-shadow {
+      position: absolute;
+      opacity: 0;
+      border-radius: 100%;
+      $size: 1.6em;
+      height: $size;
+      width: $size;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      background-color: rgba($danger, 0.2);
+      transition: opacity 0.2s;
+    }
+
+    svg {
+      vertical-align: initial;
     }
   }
 }

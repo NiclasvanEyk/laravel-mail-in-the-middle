@@ -3,4 +3,10 @@
 
 @import "mail/file-download-pill";
 @import "mail/overview";
+@import "mail/mail-detail";
 @import "mail/content-preview";
+
+body {
+  height: 100vh;
+  overflow-y: hidden;
+}

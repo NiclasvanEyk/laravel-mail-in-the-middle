@@ -3,7 +3,7 @@
     /** @var bool $showPermaLink */
 @endphp
 
-<div class="pb-3 d-flex flex-column" style="height: 100vh">
+<div class="d-flex flex-column mail-detail" style="height: 100vh">
     @component('mail-in-the-middle::components.mail.meta.mail-meta', [
          'mail' => $mail,
          'showPermaLink' => $showPermaLink ?? true,
@@ -13,6 +13,5 @@
         @component('mail-in-the-middle::components.mail.content.mail-content', [
             'mail' => $mail,
         ])@endcomponent
-        {{-- <ContentPreview mail={mail}/> --}}
     </div>
 </div>

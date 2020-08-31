@@ -15,13 +15,15 @@
 
     <div class="flex-grow-1"></div>
 
-    @if(count($mails) > 0)
+    @if(count($mails) > 0 && \Gate::allows(\VanEyk\MITM\Auth\Ability::DELETE_ALL_MAILS))
         <form method="post"
               action="{{ route(\VanEyk\MITM\Support\Route::name('clear-all')) }}"
               onsubmit="return confirm('This deletes *ALL* stored mails! Are you sure you want to do this?')">
             @method('delete')
             @csrf
-            <button type="submit" class="btn p-0" data-toggle="tooltip" title="test">
+            <button type="submit" class="btn p-0 delete-all-mail-btn" data-toggle="tooltip" title="Delete all mails">
+                <div class="round-shadow"></div>
+
                 <svg class="bi bi-trash delete-all-mail"
                      data-tooltip="Delete all mail"
                      width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -39,6 +41,7 @@
             'mail' => $mails[$selectedMailIndex],
             'active' => $loop->index == $selectedMailIndex,
             'pagination' => $mails,
+            'index' => $loop->index,
         ])@endcomponent
     @endforeach
 </ul>

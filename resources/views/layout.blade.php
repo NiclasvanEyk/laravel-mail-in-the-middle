@@ -11,13 +11,11 @@
 
     <!-- Styles -->
     <link type="text/css" href="{{ \VanEyk\MITM\Support\Route::asset('css/app.css') }}" rel="stylesheet">
+
+    <script src="{{ \VanEyk\MITM\Support\Route::asset('js/main.js') }}"></script>
 </head>
 <body>
     @yield('content')
-    <main id="mail-in-the-middle" style="display: block; min-height: 100vh">
-        {{-- Content from React --}}
-    </main>
-    <script src="{{ \VanEyk\MITM\Support\Route::asset('js/main.js') }}"></script>
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
