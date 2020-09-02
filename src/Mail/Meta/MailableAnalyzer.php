@@ -47,11 +47,11 @@ class MailableAnalyzer
         }
 
         if ($markdown = $this->forceAccess($this->mailable, 'markdown')) {
-            return file_get_contents($this->view->find($markdown));
+            return file_get_contents($this->getViewSource($markdown));
         }
 
         if ($this->mailable->view) {
-            return file_get_contents($this->view->find($this->mailable->view));
+            return file_get_contents($this->getViewSource($this->mailable->view));
         }
 
         return '';
@@ -63,5 +63,10 @@ class MailableAnalyzer
         $property = $reflection->getProperty($propertyName);
         $property->setAccessible(true);
         return $property->getValue($object);
+    }
+
+    private function getViewSource(string $name): string
+    {
+        return app('view')->getFinder()->find($name);
     }
 }
