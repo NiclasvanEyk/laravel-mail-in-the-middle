@@ -67,7 +67,7 @@ Otherwise it can be enabled/disabled by setting the `MAIL_IN_THE_MIDDLE_ENABLED`
 environment variable or by manually configuring the `'register_routes'`-value
 of the `config/mail-in-the-middle.php` file. 
 
-**WARNING**: any mails, that are sent using another mailer, e.g. if you 
+**WARNING**: Any mails, that are sent using another mailer, e.g. if you 
 explicitly define, that a `Mailable` should be sent through Mailgun using 
 `Mail::mailer('mailgun')->send(new MyMailable())` will be sent out to the 
 recipient. The [official documentation](https://laravel.com/docs/7.x/mail#sending-mail)
