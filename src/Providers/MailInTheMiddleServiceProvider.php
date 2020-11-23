@@ -14,6 +14,7 @@ use VanEyk\MITM\Support\Config;
 use VanEyk\MITM\Storage\MailStorage;
 use VanEyk\MITM\Storage\MailStorageManager;
 use VanEyk\MITM\Support\Path;
+use VanEyk\MITM\View\Components\AttachmentIcon;
 
 class MailInTheMiddleServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,9 @@ class MailInTheMiddleServiceProvider extends ServiceProvider
         $this->addTransportDriver();
         $this->defineGates();
         $this->loadViewsFrom(Path::view(), Config::KEY);
+        $this->loadViewComponentsAs(Config::SHORT_KEY, [
+            AttachmentIcon::class,
+        ]);
 
         if (Config::get('register_routes')) {
             $this->loadRoutesFrom(Path::routes('api.php'));

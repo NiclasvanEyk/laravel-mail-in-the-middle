@@ -272,7 +272,7 @@ class FilesystemStorage implements MailStorage
         return $this->attachmentForMailFromAttributes($mail, $attributes);
     }
 
-    public function delete($id)
+    public function delete($id): void
     {
         if ($this->filesystem->disk()->exists($id)) {
             $this->filesystem->disk()->deleteDirectory($id);

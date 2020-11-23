@@ -25,6 +25,9 @@ use VanEyk\MITM\Support\View;
     Route::delete('/mails/{id}', [MailController::class, 'destroy'])
         ->name(PackageRoute::name('mail-destroy'));
 
+    Route::get("$path/mails/{mailId}/attachments/{attachmentId}", [MailController::class, 'downloadAttachment'])
+        ->name(PackageRoute::name('attachment.download'));
+
     Route::get("$path/{id}", [MailController::class, 'show'])
         ->name(PackageRoute::name('mail-detail'));
 

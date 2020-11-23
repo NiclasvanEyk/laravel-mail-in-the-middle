@@ -121,7 +121,7 @@ class DatabaseStorage implements MailStorage
         return $instance;
     }
 
-    public function delete($id)
+    public function delete($id): void
     {
         if (($model = $this->find($id)) !== null) {
             $model->delete();

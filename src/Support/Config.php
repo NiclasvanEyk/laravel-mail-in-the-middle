@@ -2,10 +2,14 @@
 
 namespace VanEyk\MITM\Support;
 
+use Illuminate\Mail\Mailer;
+use Illuminate\Support\Facades\Mail;
+
 class Config
 {
     public const KEY = 'mail-in-the-middle';
-    public const COMMAND_PREFIX = 'mitm';
+    public const SHORT_KEY = 'mitm';
+    public const COMMAND_PREFIX = self::SHORT_KEY;
 
     public const FILE_NAME = self::KEY . '.php';
 
@@ -30,6 +34,10 @@ class Config
         return self::mailDriverInUse() === Config::KEY;
     }
 
+    /**
+     * @psalm-suppress MissingParamType
+     * @psalm-suppress MissingReturnType
+     */
     public static function get(string $path, $default = null)
     {
         return config(static::KEY . '.' . $path, $default);

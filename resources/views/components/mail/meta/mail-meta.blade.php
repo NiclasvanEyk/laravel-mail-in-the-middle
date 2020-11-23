@@ -69,12 +69,11 @@
                     Attachments:
                 </div>
                 @foreach ($mail->attachments as $attachment)
-                    <div class="mx-1 my-1" title="download {{$attachment->name}}">
-                        {{-- <AttachmentPill
-                            mail={mail}
-                            attachment={attachment}
-                        /> --}}
-                        TODO
+                    <div class="mx-1 my-1" title="download {{data_get($attachment, 'name')}}">
+                        @component('mail-in-the-middle::components.mail.detail.attachment', [
+                            'mail' => $mail,
+                            'attachment' => $attachment,
+                        ])@endcomponent
                     </div>
                 @endforeach
             </li>

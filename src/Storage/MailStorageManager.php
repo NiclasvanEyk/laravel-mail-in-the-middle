@@ -9,10 +9,7 @@ use VanEyk\MITM\Support\Config;
 
 class MailStorageManager extends Manager
 {
-    /** @var array */
-    private $packageConfig;
-
-    public function getDefaultDriver()
+    public function getDefaultDriver(): string
     {
         return Config::get('storage_driver') ?? 'filesystem';
     }
