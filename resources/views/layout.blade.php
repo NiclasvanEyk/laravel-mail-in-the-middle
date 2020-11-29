@@ -9,18 +9,17 @@
 
     <title>📧 Mails - {{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script>
-        window.MAIL_IN_THE_MIDDLE_BASE_URL = '{{ \VanEyk\MITM\Support\Config::get('path') }}'
-    </script>
-
     <!-- Styles -->
     <link type="text/css" href="{{ \VanEyk\MITM\Support\Route::asset('css/app.css') }}" rel="stylesheet">
+
+    <script src="{{ \VanEyk\MITM\Support\Route::asset('js/main.js') }}"></script>
 </head>
 <body>
     @yield('content')
-    <main id="mail-in-the-middle" style="display: block; min-height: 100vh">
-        {{-- Content from React --}}
-    </main>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 </body>
 </html>

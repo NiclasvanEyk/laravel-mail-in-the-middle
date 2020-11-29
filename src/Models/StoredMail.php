@@ -36,6 +36,9 @@ class StoredMail extends Model
     protected $guarded = [];
     protected $dateFormat = FilesystemStorage::TIMESTAMP_FORMAT;
     protected $with = ['attachments'];
+    protected $casts = [
+        'created_at' => 'datetime',
+    ];
 
     public function attachments(): HasMany
     {

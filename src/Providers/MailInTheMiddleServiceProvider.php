@@ -2,14 +2,19 @@
 
 namespace VanEyk\MITM\Providers;
 
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use VanEyk\MITM\Auth\Ability;
 use VanEyk\MITM\Console\Commands\HouseKeepingCommand;
+use VanEyk\MITM\Console\Commands\SendTestMailCommand;
 use VanEyk\MITM\Mail\Transport\MailInTheMiddleMailer;
 use VanEyk\MITM\Storage\Filesystem;
 use VanEyk\MITM\Support\Config;
 use VanEyk\MITM\Storage\MailStorage;
 use VanEyk\MITM\Storage\MailStorageManager;
 use VanEyk\MITM\Support\Path;
+use VanEyk\MITM\View\Components\AttachmentIcon;
 
 class MailInTheMiddleServiceProvider extends ServiceProvider
 {
@@ -30,7 +35,11 @@ class MailInTheMiddleServiceProvider extends ServiceProvider
         }
 
         $this->addTransportDriver();
+        $this->defineGates();
         $this->loadViewsFrom(Path::view(), Config::KEY);
+        $this->loadViewComponentsAs(Config::SHORT_KEY, [
+            AttachmentIcon::class,
+        ]);
 
         if (Config::get('register_routes')) {
             $this->loadRoutesFrom(Path::routes('api.php'));
@@ -43,7 +52,19 @@ class MailInTheMiddleServiceProvider extends ServiceProvider
 
         $this->commands([
             HouseKeepingCommand::class,
+            SendTestMailCommand::class,
         ]);
+    }
+
+    public function defineGates()
+    {
+        Gate::define(Ability::DELETE_MAIL, function ($user = null, $mail) {
+            return true;
+        });
+
+        Gate::define(Ability::DELETE_ALL_MAILS, function ($user = null) {
+            return true;
+        });
     }
 
     public function addTransportDriver()

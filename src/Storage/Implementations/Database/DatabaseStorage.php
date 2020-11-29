@@ -3,7 +3,7 @@
 namespace VanEyk\MITM\Storage\Implementations\Database;
 
 use Carbon\Carbon;
-use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Swift_Mime_SimpleMessage;
@@ -121,7 +121,7 @@ class DatabaseStorage implements MailStorage
         return $instance;
     }
 
-    public function delete($id)
+    public function delete($id): void
     {
         if (($model = $this->find($id)) !== null) {
             $model->delete();

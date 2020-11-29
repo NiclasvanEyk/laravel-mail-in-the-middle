@@ -3,11 +3,8 @@
 namespace VanEyk\MITM\Storage\Implementations\Filesystem;
 
 use Carbon\Carbon;
-use Illuminate\Contracts\Pagination\Paginator as PaginatorContract;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Log;
 use Swift_Mime_SimpleMessage;
-use VanEyk\MITM\Exceptions\CouldNotStoreMailException;
 use VanEyk\MITM\Models\StoredAttachment;
 use VanEyk\MITM\Storage\Filesystem;
 use VanEyk\MITM\Storage\Implementations\Database\DatabaseStorage;
@@ -158,7 +155,7 @@ class FilesystemStorage implements MailStorage
         $mail->setRelation('attachments', $attachments);
     }
 
-    public function paginate(int $page = 1, $perPage = 10): PaginatorContract
+    public function paginate(int $page = 1, $perPage = 10): Paginator
     {
         $contents = array_reverse($this->filesystem->disk()->directories());
 
@@ -275,7 +272,7 @@ class FilesystemStorage implements MailStorage
         return $this->attachmentForMailFromAttributes($mail, $attributes);
     }
 
-    public function delete($id)
+    public function delete($id): void
     {
         if ($this->filesystem->disk()->exists($id)) {
             $this->filesystem->disk()->deleteDirectory($id);

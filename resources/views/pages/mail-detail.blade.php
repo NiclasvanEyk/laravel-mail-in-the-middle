@@ -1,7 +1,10 @@
 @extends('mail-in-the-middle::layout')
 
 @section('content')
-    <script async defer src="{{ \VanEyk\MITM\Support\Route::asset(
-        'js/detail.js'
-    ) }}"></script>
+    <div class="container">
+        @component('mail-in-the-middle::components.mail.detail.mail-detail', [
+            'mail' => $mail,
+            'showPermaLink' => false, // We are already on the detail page
+        ])@endcomponent
+    </div>
 @endsection

@@ -14,9 +14,6 @@ class MailableAnalyzer
     /** @var Mailable */
     private $mailable;
 
-    /** @var ViewFinderInterface */
-    private $view;
-
     /** @noRector Rector\SOLID\Rector\ClassMethod\UseInterfaceOverImplementationInConstructorRector */
     public function __construct(Mailable $mailable)
     {
@@ -55,6 +52,11 @@ class MailableAnalyzer
         }
 
         return '';
+    }
+
+    private function getViewSource(string $name): string
+    {
+        return app('view')->getFinder()->find($name);
     }
 
     private function forceAccess($object, string $propertyName)
