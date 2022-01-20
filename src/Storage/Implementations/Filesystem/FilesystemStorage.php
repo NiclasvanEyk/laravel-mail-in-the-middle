@@ -245,7 +245,7 @@ class FilesystemStorage implements MailStorage
             $this->mailFolderPath($id)
         );
 
-        if (!$filesInFolder || count($filesInFolder) <= 0) {
+        if (!$filesInFolder) {
             return null;
         }
 

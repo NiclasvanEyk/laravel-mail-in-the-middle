@@ -11,17 +11,11 @@ use VanEyk\MITM\View\Dump\CustomHtmlDumper;
 
 class MailableAnalyzer
 {
-    /** @var Mailable */
-    private $mailable;
+    private Mailable $mailable;
 
-    /** @var ViewFinderInterface */
-    private $view;
-
-    /** @noRector Rector\SOLID\Rector\ClassMethod\UseInterfaceOverImplementationInConstructorRector */
     public function __construct(Mailable $mailable)
     {
         $this->mailable = $mailable;
-        $this->view = app('view.finder');
     }
 
     public function viewDataArray(): array
